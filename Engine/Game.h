@@ -36,11 +36,24 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
+	void DrawTitle(int x, int y);
+	void DrawFace(int x, int y);
+	void DrawPoo(int x, int y);
+	void DrawGameOver(int x, int y);
+	void PlayerMovement(bool enabled);
+	void ClampObject(int& x, int& y, int xWidth, int yHeight);
 	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	bool HasStarted = false;
+	bool IsGameOver = false;
+	int PlayerSpeed = 3;
+	int PlayerX = 400;
+	int PlayerY = 300;
+	const int PlayerWidth = 20;
+	const int PlayerHeight = 20;
 	/********************************/
 };
