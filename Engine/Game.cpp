@@ -20,12 +20,19 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <random>
 
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd )
 {
+	std::random_device rd;
+	std::mt19937 rng( rd() );
+	std::uniform_int_distribution<int> xDist(0, (gfx.ScreenWidth - 1) - PooWidth);
+	std::uniform_int_distribution<int> yDist(0, (gfx.ScreenHeight - 1) - PooHeight);
+	PooX = xDist(rng);
+	PooY = yDist(rng);
 }
 
 void Game::Go()
@@ -28997,4 +29004,5 @@ void Game::DrawGameOver(int x, int y)
 void Game::ComposeFrame()
 {
 	DrawFace(PlayerX, PlayerY);
+	DrawPoo(PooX, PooY);
 }

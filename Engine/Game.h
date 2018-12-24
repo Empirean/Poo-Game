@@ -55,5 +55,11 @@ private:
 	int PlayerY = 300;
 	const int PlayerWidth = 20;
 	const int PlayerHeight = 20;
+
+	// poop
+	int PooX = 200;
+	int PooY = 200;
+	const int PooWidth = 24;
+	const int PooHeight = 24;
 	/********************************/
 };
