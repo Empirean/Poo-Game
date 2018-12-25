@@ -52,16 +52,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
 	PlayerMovement(true);
 	ClampObject(PlayerX, PlayerY, PlayerWidth, PlayerHeight);
 	CollisionChecker();
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) HasStarted = true;
-	bool temp_gameOver = true;
-	for (int i = 0; i < PooMaxCount; i++)
-	{
-		temp_gameOver = temp_gameOver && poo[i].IsEaten();
-	}
-	IsGameOver = temp_gameOver;
+	GameOverChecker();
+	
 }
 
 void Game::PlayerMovement(bool enabled)
@@ -136,6 +133,16 @@ void Game::CollisionChecker()
 			poo[i].Eat();
 		}
 	}
+}
+
+void Game::GameOverChecker()
+{
+	bool temp_gameOver = true;
+	for (int i = 0; i < PooMaxCount; i++)
+	{
+		temp_gameOver = temp_gameOver && poo[i].IsEaten();
+	}
+	IsGameOver = temp_gameOver;
 }
 
 void Game::DrawTitle(int x, int y)

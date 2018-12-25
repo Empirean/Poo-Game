@@ -46,6 +46,7 @@ private:
 	void DrawPoos();
 	bool IsColliding(int x0, int y0, int width0, int height0, Poo poo);
 	void CollisionChecker();
+	void GameOverChecker();
 	/********************************/
 private:
 	MainWindow& wnd;
