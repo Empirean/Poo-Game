@@ -31,8 +31,6 @@ Game::Game( MainWindow& wnd )
 	std::random_device rd;
 	std::mt19937 rng( rd() );
 
-	
-
 	for (int i = 0; i < PooMaxCount; i++)
 	{
 		std::uniform_int_distribution<int> xDist(0, (gfx.ScreenWidth - 1) - poo[i].Width);
@@ -56,14 +54,14 @@ void Game::UpdateModel()
 {
 	PlayerMovement(true);
 	ClampObject(PlayerX, PlayerY, PlayerWidth, PlayerHeight);
-
+	CollisionChecker();
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) HasStarted = true;
+	bool temp_gameOver = true;
 	for (int i = 0; i < PooMaxCount; i++)
 	{
-		if (IsColliding(PlayerX, PlayerY, PlayerWidth, PlayerHeight, poo[i]))
-		{
-			poo[i].Eat();
-		}
+		temp_gameOver = temp_gameOver && poo[i].IsEaten();
 	}
+	IsGameOver = temp_gameOver;
 }
 
 void Game::PlayerMovement(bool enabled)
@@ -129,7 +127,16 @@ bool Game::IsColliding(int x0, int y0, int width0, int height0, Poo poo)
 	return right >= poo.GetLeft() && x0 <= poo.GetRight() && bottom >= poo.GetTop() && y0 <= poo.GetBottom();
 }
 
-
+void Game::CollisionChecker()
+{
+	for (int i = 0; i < PooMaxCount; i++)
+	{
+		if (IsColliding(PlayerX, PlayerY, PlayerWidth, PlayerHeight, poo[i]))
+		{
+			poo[i].Eat();
+		}
+	}
+}
 
 void Game::DrawTitle(int x, int y)
 {
@@ -29039,6 +29046,20 @@ void Game::DrawGameOver(int x, int y)
 
 void Game::ComposeFrame()
 {
-	DrawFace(PlayerX, PlayerY);
-	DrawPoos();
+	if (!HasStarted)
+	{
+		DrawTitle((gfx.ScreenWidth / 2) - 70, (gfx.ScreenHeight / 2) - 88);
+	}
+	else
+	{
+		if (!IsGameOver)
+		{
+			DrawFace(PlayerX, PlayerY);
+			DrawPoos();
+		}
+		else
+		{
+			DrawGameOver((gfx.ScreenWidth / 2) - 42, (gfx.ScreenHeight / 2) - 32);
+		}
+	}
 }

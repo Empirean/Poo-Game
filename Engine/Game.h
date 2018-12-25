@@ -45,6 +45,7 @@ private:
 	void ClampObject(int& x, int& y, int xWidth, int yHeight);
 	void DrawPoos();
 	bool IsColliding(int x0, int y0, int width0, int height0, Poo poo);
+	void CollisionChecker();
 	/********************************/
 private:
 	MainWindow& wnd;
