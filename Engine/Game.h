@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Poo.h"
 
 class Game
 {
@@ -42,6 +43,8 @@ private:
 	void DrawGameOver(int x, int y);
 	void PlayerMovement(bool enabled);
 	void ClampObject(int& x, int& y, int xWidth, int yHeight);
+	void DrawPoos();
+	bool IsColliding(int x0, int y0, int width0, int height0, Poo poo);
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -57,9 +60,7 @@ private:
 	const int PlayerHeight = 20;
 
 	// poop
-	int PooX = 200;
-	int PooY = 200;
-	const int PooWidth = 24;
-	const int PooHeight = 24;
+	static constexpr int  PooMaxCount = 10;
+	Poo poo[PooMaxCount];
 	/********************************/
 };

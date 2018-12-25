@@ -22,6 +22,7 @@
 #include "Game.h"
 #include <random>
 
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
@@ -29,10 +30,16 @@ Game::Game( MainWindow& wnd )
 {
 	std::random_device rd;
 	std::mt19937 rng( rd() );
-	std::uniform_int_distribution<int> xDist(0, (gfx.ScreenWidth - 1) - PooWidth);
-	std::uniform_int_distribution<int> yDist(0, (gfx.ScreenHeight - 1) - PooHeight);
-	PooX = xDist(rng);
-	PooY = yDist(rng);
+
+	
+
+	for (int i = 0; i < PooMaxCount; i++)
+	{
+		std::uniform_int_distribution<int> xDist(0, (gfx.ScreenWidth - 1) - poo[i].Width);
+		std::uniform_int_distribution<int> yDist(0, (gfx.ScreenHeight - 1) - poo[i].Height);
+		poo[i].SetX(xDist(rng));
+		poo[i].SetY(yDist(rng));
+	}
 }
 
 void Game::Go()
@@ -49,6 +56,14 @@ void Game::UpdateModel()
 {
 	PlayerMovement(true);
 	ClampObject(PlayerX, PlayerY, PlayerWidth, PlayerHeight);
+
+	for (int i = 0; i < PooMaxCount; i++)
+	{
+		if (IsColliding(PlayerX, PlayerY, PlayerWidth, PlayerHeight, poo[i]))
+		{
+			poo[i].Eat();
+		}
+	}
 }
 
 void Game::PlayerMovement(bool enabled)
@@ -93,6 +108,27 @@ void Game::ClampObject(int& x, int& y, int xWidth, int yHeight)
 		y = (gfx.ScreenHeight - 1) - yHeight;
 	}
 }
+
+void Game::DrawPoos()
+{
+	for (int i = 0; i < PooMaxCount; i++)
+	{
+		if (!poo[i].IsEaten())
+		{
+			DrawPoo(poo[i].GetX(), poo[i].GetY());
+		}
+		
+	}
+}
+
+bool Game::IsColliding(int x0, int y0, int width0, int height0, Poo poo)
+{
+	const int right = x0 + width0;
+	const int bottom = y0 + height0;
+
+	return right >= poo.GetLeft() && x0 <= poo.GetRight() && bottom >= poo.GetTop() && y0 <= poo.GetBottom();
+}
+
 
 
 void Game::DrawTitle(int x, int y)
@@ -29004,5 +29040,5 @@ void Game::DrawGameOver(int x, int y)
 void Game::ComposeFrame()
 {
 	DrawFace(PlayerX, PlayerY);
-	DrawPoo(PooX, PooY);
+	DrawPoos();
 }
