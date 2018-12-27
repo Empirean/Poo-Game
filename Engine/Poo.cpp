@@ -99,6 +99,7 @@ void Poo::ClampPoo(Graphics& gfx)
 		_Left = false;
 		_Right = true;
 	}
+
 	if (_Y < 0)
 	{
 		_Y = 0;
@@ -112,6 +113,7 @@ void Poo::ClampPoo(Graphics& gfx)
 		_Right = false;
 		_Left = true;
 	}
+
 	if (_Y > (gfx.ScreenHeight - 1) - Height)
 	{
 		_Y = (gfx.ScreenHeight - 1) - Height;

@@ -47,6 +47,7 @@ private:
 	bool IsColliding(int x0, int y0, int width0, int height0, Poo poo);
 	void CollisionChecker();
 	void GameOverChecker();
+	void PooUpdater();
 	/********************************/
 private:
 	MainWindow& wnd;
