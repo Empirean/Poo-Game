@@ -11,6 +11,13 @@ private:
 	int _Y;
 	int _Rate = 3;
 
+	bool _Left = false;
+	bool _Right = false;
+	bool _Top = false;
+	bool _Bottom = false;
+
+	void ClampPoo(Graphics& gfx);	
+
 public:
 	Poo();
 	void Eat();
@@ -23,9 +30,11 @@ public:
 	int GetY();
 	int SetX(int x);
 	int SetY(int y);
+	void Update(Graphics& gfx);
 
 	static constexpr int Height = 24;
 	static constexpr int Width = 24;
+	static constexpr int Speed = 3;
 	
 };
 

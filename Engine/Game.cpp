@@ -110,7 +110,9 @@ void Game::DrawPoos()
 	{
 		if (!poo[i].IsEaten())
 		{
+			poo[i].Update(gfx);
 			DrawPoo(poo[i].GetX(), poo[i].GetY());
+			
 		}
 		
 	}
