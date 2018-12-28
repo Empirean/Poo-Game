@@ -81,17 +81,17 @@ int Poo::SetY(int y)
 	return _Y = y;
 }
 
-void Poo::Update(Graphics& gfx)
+void Poo::Update()
 {
 	if (_Top) _Y -= _Rate;
 	if (_Bottom) _Y += _Rate;
 	if (_Left) _X -= _Rate;
 	if (_Right) _X += _Rate;
-	ClampPoo(gfx);
+	ClampPoo();
 }
 
 
-void Poo::ClampPoo(Graphics& gfx)
+void Poo::ClampPoo()
 {
 	if (_X < 0)
 	{
@@ -107,16 +107,16 @@ void Poo::ClampPoo(Graphics& gfx)
 		_Bottom = true;
 	}
 
-	if (_X > (gfx.ScreenWidth - 1) - Width)
+	if (_X > (Graphics::ScreenWidth - 1) - Width)
 	{
-		_X = (gfx.ScreenWidth - 1) - Width;
+		_X = (Graphics::ScreenWidth - 1) - Width;
 		_Right = false;
 		_Left = true;
 	}
 
-	if (_Y > (gfx.ScreenHeight - 1) - Height)
+	if (_Y > (Graphics::ScreenHeight - 1) - Height)
 	{
-		_Y = (gfx.ScreenHeight - 1) - Height;
+		_Y = (Graphics::ScreenHeight - 1) - Height;
 		_Bottom = false;
 		_Top = true;
 	}

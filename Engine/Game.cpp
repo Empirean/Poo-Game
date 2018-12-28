@@ -153,7 +153,7 @@ void Game::PooUpdater()
 	{
 		if (!poo[i].IsEaten())
 		{
-			poo[i].Update(gfx);
+			poo[i].Update();
 		}
 
 	}

@@ -16,7 +16,7 @@ private:
 	bool _Top = false;
 	bool _Bottom = false;
 
-	void ClampPoo(Graphics& gfx);	
+	void ClampPoo();	
 
 public:
 	Poo();
@@ -30,7 +30,7 @@ public:
 	int GetY();
 	int SetX(int x);
 	int SetY(int y);
-	void Update(Graphics& gfx);
+	void Update();
 
 	static constexpr int Height = 24;
 	static constexpr int Width = 24;
