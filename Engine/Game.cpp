@@ -54,7 +54,7 @@ void Game::UpdateModel()
 {
 
 	PlayerMovement(true);
-	ClampObject(PlayerX, PlayerY, PlayerWidth, PlayerHeight);
+	player.Clamp(0, Graphics::ScreenWidth - 1, 0, Graphics::ScreenHeight - 1);
 	PooUpdater();
 	CollisionChecker();
 	if (wnd.kbd.KeyIsPressed(VK_SPACE)) HasStarted = true;
@@ -69,19 +69,19 @@ void Game::PlayerMovement(bool enabled)
 	{
 		if (wnd.kbd.KeyIsPressed( 'W' ))
 		{
-			PlayerY -= PlayerSpeed;
+			player.UpdateY(-Player::Speed);
 		}
 		if (wnd.kbd.KeyIsPressed('A'))
 		{
-			PlayerX -= PlayerSpeed;
+			player.UpdateX(-Player::Speed);
 		}
 		if (wnd.kbd.KeyIsPressed('S'))
 		{
-			PlayerY += PlayerSpeed;
+			player.UpdateY(Player::Speed);
 		}
 		if (wnd.kbd.KeyIsPressed('D'))
 		{
-			PlayerX += PlayerSpeed;
+			player.UpdateX(Player::Speed);
 		}
 	}
 }
@@ -118,19 +118,17 @@ void Game::DrawPoos()
 	}
 }
 
-bool Game::IsColliding(int x0, int y0, int width0, int height0, Poo poo)
+bool Game::IsColliding(Player player, Poo poo)
 {
-	const int right = x0 + width0;
-	const int bottom = y0 + height0;
-
-	return right >= poo.GetLeft() && x0 <= poo.GetRight() && bottom >= poo.GetTop() && y0 <= poo.GetBottom();
+	return player.GetRight() >= poo.GetLeft() && player.GetLeft() <= poo.GetRight() 
+		&& player.GetBottom() >= poo.GetTop() && player.GetTop() <= poo.GetBottom();
 }
 
 void Game::CollisionChecker()
 {
 	for (int i = 0; i < PooMaxCount; i++)
 	{
-		if (IsColliding(PlayerX, PlayerY, PlayerWidth, PlayerHeight, poo[i]))
+		if (IsColliding(player, poo[i]))
 		{
 			poo[i].Eat();
 		}
@@ -29075,7 +29073,7 @@ void Game::ComposeFrame()
 	{
 		if (!IsGameOver)
 		{
-			DrawFace(PlayerX, PlayerY);
+			DrawFace(player.GetX(), player.GetY());
 			DrawPoos();
 		}
 		else

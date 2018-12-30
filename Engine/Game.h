@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Poo.h"
+#include "Player.h"		
 
 class Game
 {
@@ -44,7 +45,7 @@ private:
 	void PlayerMovement(bool enabled);
 	void ClampObject(int& x, int& y, int xWidth, int yHeight);
 	void DrawPoos();
-	bool IsColliding(int x0, int y0, int width0, int height0, Poo poo);
+	bool IsColliding(Player player, Poo poo);
 	void CollisionChecker();
 	void GameOverChecker();
 	void PooUpdater();
@@ -56,12 +57,8 @@ private:
 	/*  User Variables              */
 	bool HasStarted = false;
 	bool IsGameOver = false;
-	int PlayerSpeed = 3;
-	int PlayerX = 400;
-	int PlayerY = 300;
-	const int PlayerWidth = 20;
-	const int PlayerHeight = 20;
 
+	Player player;
 	// poop
 	static constexpr int  PooMaxCount = 10;
 	Poo poo[PooMaxCount];
