@@ -1,5 +1,9 @@
 #pragma once
 
+
+#include "Graphics.h"
+
+
 class Player
 {
 
@@ -17,8 +21,12 @@ public:
 	int GetRight();
 
 	void Clamp(int left, int right, int top, int bottom);
-	void UpdateX(int x);
-	void UpdateY(int y);
+	void Draw(Graphics& gfx);
+
+	void MoveLeft();
+	void MoveRight();
+	void MoveUp();
+	void MoveDown();
 
 	static constexpr int Width = 20;
 	static constexpr int Height = 20;

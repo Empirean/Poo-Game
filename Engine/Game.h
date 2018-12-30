@@ -39,15 +39,15 @@ private:
 	/********************************/
 	/*  User Functions              */
 	void DrawTitle(int x, int y);
-	void DrawFace(int x, int y);
-	void DrawPoo(int x, int y);
 	void DrawGameOver(int x, int y);
 	void PlayerMovement(bool enabled);
-	void ClampObject(int& x, int& y, int xWidth, int yHeight);
-	void DrawPoos();
+	
 	bool IsColliding(Player player, Poo poo);
 	void CollisionChecker();
 	void GameOverChecker();
+
+	// poo handler
+	void DrawPoos();
 	void PooUpdater();
 	/********************************/
 private:
@@ -55,9 +55,11 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+
+	// game
 	bool HasStarted = false;
 	bool IsGameOver = false;
-
+	// player
 	Player player;
 	// poop
 	static constexpr int  PooMaxCount = 10;

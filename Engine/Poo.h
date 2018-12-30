@@ -31,6 +31,7 @@ public:
 	int SetX(int x);
 	int SetY(int y);
 	void Update();
+	void Draw(Graphics& gfx);
 
 	static constexpr int Height = 24;
 	static constexpr int Width = 24;
