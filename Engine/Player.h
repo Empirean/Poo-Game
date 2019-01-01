@@ -8,28 +8,39 @@ class Player
 {
 
 private:
-	int _X = 400;
-	int _Y = 300;
+	// initial position
+	int _X = Graphics::ScreenWidth / 2;
+	int _Y = Graphics::ScreenHeight / 2;
+
+	// Dimensions
+	static constexpr int Width = 20;
+	static constexpr int Height = 20;
+
+	// Speed
+	static constexpr int Speed = 3;
 
 public:
+
+	// constructor
 	Player();
-	int GetX();
-	int GetY();
-	int GetTop();
-	int GetBottom();
-	int GetLeft();
-	int GetRight();
 
-	void Clamp(int left, int right, int top, int bottom);
-	void Draw(Graphics& gfx);
+	// Getters
+	int GetTop() const;
+	int GetBottom() const;
+	int GetLeft() const;
+	int GetRight() const;
 
+	// Movement
 	void MoveLeft();
 	void MoveRight();
 	void MoveUp();
 	void MoveDown();
 
-	static constexpr int Width = 20;
-	static constexpr int Height = 20;
-	static constexpr int Speed = 3;
+	// Clamping
+	void Clamp(int left, int right, int top, int bottom);
+
+	// Draw
+	void Draw(Graphics& gfx) const;
+	
 };
 

@@ -6,32 +6,22 @@ Player::Player()
 {
 }
 
-int Player::GetX()
-{
-	return _X;
-}
-
-int Player::GetY()
+int Player::GetTop() const
 {
 	return _Y;
 }
 
-int Player::GetTop()
-{
-	return _Y;
-}
-
-int Player::GetBottom()
+int Player::GetBottom() const
 {
 	return _Y + Height;
 }
 
-int Player::GetLeft()
+int Player::GetLeft() const
 {
 	return _X;
 }
 
-int Player::GetRight()
+int Player::GetRight() const
 {
 	return _X + Width;
 }
@@ -56,7 +46,7 @@ void Player::Clamp(int left, int right, int top, int bottom)
 	}
 }
 
-void Player::Draw(Graphics & gfx)
+void Player::Draw(Graphics & gfx) const
 {
 	const int x = _X;
 	const int y = _Y;
