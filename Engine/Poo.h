@@ -21,7 +21,6 @@ private:
 	// Dimensions
 	static constexpr int Height = 24;
 	static constexpr int Width = 24;
-	static constexpr int Speed = 3;
 	// Clamping
 	void ClampPoo();
 
