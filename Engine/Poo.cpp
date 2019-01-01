@@ -1,34 +1,29 @@
 #include "Poo.h"
 #include <random>
 
-
-
-
 Poo::Poo()
 {
+	// Random Device
 	std::random_device rd;
+
+	// Random Number Generator
 	std::mt19937 rng(rd());
 
+	// Random Initial Position
+	std::uniform_int_distribution<int> xPos(0, (Graphics::ScreenWidth - 1) - Width);
+	std::uniform_int_distribution<int> yPos(0, (Graphics::ScreenHeight - 1) - Height);
+
+	// Initialize Position
+	_X = xPos(rng);
+	_Y = yPos(rng);
+
+	// Random Direction
 	std::uniform_int_distribution<int> xDist(0, 1);
 	std::uniform_int_distribution<int> yDist(0, 1);
 
-	if (xDist(rng) == 0)
-	{
-		_Top = true;
-	}
-	else
-	{
-		_Bottom = true;
-	}
-
-	if (yDist(rng) == 0)
-	{
-		_Left = true;
-	}
-	else
-	{
-		_Right = true;
-	}
+	// Initialize Direction
+	xDist(rng) == 0 ? _Top = true : _Bottom = true;
+	yDist(rng) == 0 ? _Left = true : _Right = true;
 }
 
 void Poo::Eat()
@@ -36,49 +31,29 @@ void Poo::Eat()
 	_IsEaten = true;
 }
 
-bool Poo::IsEaten()
+bool Poo::IsEaten() const
 {
 	return _IsEaten;
 }
 
-int Poo::GetLeft()
+int Poo::GetLeft() const
 {
 	return _X;
 }
 
-int Poo::GetRight()
+int Poo::GetRight() const
 {
 	return _X + Width;
 }
 
-int Poo::GetTop()
+int Poo::GetTop() const
 {
 	return _Y;
 }
 
-int Poo::GetBottom()
+int Poo::GetBottom() const
 {
 	return _Y + Height;
-}
-
-int Poo::GetX()
-{
-	return _X;
-}
-
-int Poo::GetY()
-{
-	return _Y;
-}
-
-int Poo::SetX(int x)
-{
-	return _X = x;
-}
-
-int Poo::SetY(int y)
-{
-	return _Y = y;
 }
 
 void Poo::Update()
@@ -90,7 +65,7 @@ void Poo::Update()
 	ClampPoo();
 }
 
-void Poo::Draw(Graphics & gfx)
+void Poo::Draw(Graphics & gfx) const
 {
 	const int x = _X;
 	const int y = _Y;

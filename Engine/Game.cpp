@@ -28,16 +28,6 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd )
 {
-	std::random_device rd;
-	std::mt19937 rng( rd() );
-
-	for (int i = 0; i < PooMaxCount; i++)
-	{
-		std::uniform_int_distribution<int> xDist(0, (gfx.ScreenWidth - 1) - poo[i].Width);
-		std::uniform_int_distribution<int> yDist(0, (gfx.ScreenHeight - 1) - poo[i].Height);
-		poo[i].SetX(xDist(rng));
-		poo[i].SetY(yDist(rng));
-	}
 }
 
 void Game::Go()
