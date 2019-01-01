@@ -42,7 +42,7 @@ private:
 	void DrawGameOver(int x, int y);
 	void PlayerMovement(bool enabled);
 	
-	bool IsColliding(Player player, Poo poo);
+	bool IsColliding(Player& player, Poo& poo);
 	void CollisionChecker();
 	void GameOverChecker();
 

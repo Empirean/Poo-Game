@@ -88,7 +88,7 @@ void Game::DrawPoos()
 	}
 }
 
-bool Game::IsColliding(Player player, Poo poo)
+bool Game::IsColliding(Player& player, Poo& poo)
 {
 	return player.GetRight() >= poo.GetLeft() && player.GetLeft() <= poo.GetRight() 
 		&& player.GetBottom() >= poo.GetTop() && player.GetTop() <= poo.GetBottom();
